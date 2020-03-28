@@ -40,7 +40,7 @@ export class UserForm extends Component {
     const { step } = this.state;
     const { firstName, lastName, email, date, time, location } = this.state;
     const values = { firstName, lastName, email, date, time, location };
-
+      // eslint-disable-next-line
     switch (step) {
       case 1:
         return (

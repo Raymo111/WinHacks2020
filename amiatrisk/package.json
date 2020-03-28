@@ -9,6 +9,8 @@
     "@testing-library/user-event": "^7.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-native-datepicker": "^1.7.2",
+    "react-native-ui-xg": "0.0.6",
     "react-scripts": "3.4.1"
   },
   "scripts": {

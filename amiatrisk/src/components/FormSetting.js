@@ -26,24 +26,36 @@ export class FormSetting extends Component {
             fullWidth="true"
             maxWidth='sm'
           >
-            <AppBar title="Enter Setting" />
-            <TextField
-              placeholder="Enter Date (yyyy-mm-dd)"
-              label="Date"
-              onChange={handleChange('date')}
-              defaultValue={values.date}
-              margin="normal"
-              fullWidth="true"
-            />
-            <br />
-            <TextField
-              placeholder="Enter Time (00:00 AM/PM)"
-              label="Time"
-              onChange={handleChange('time')}
-              defaultValue={values.time}
-              margin="normal"
-							fullWidth="true"
-            />
+                    <AppBar title="Enter Setting" />
+                    <form className={FormSetting} noValidate>
+                        <TextField
+                            id="date"
+                            label="Date"
+                            type="date"
+                            defaultValue="2017-05-24"
+                          //  className={classes.textField}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                    </form>
+                  
+                    <form className={FormSetting} noValidate>
+                        
+                        <TextField
+                            id="time"
+                            label="Time"
+                            type="time"
+                            defaultValue="07:30"
+                       //     className={classes.textField}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            inputProps={{
+                                step: 300, // 5 min
+                            }}
+                        />
+                    </form>
             <br />
             <TextField
               placeholder="Enter Your Location (lat, long)"
