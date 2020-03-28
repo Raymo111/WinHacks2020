@@ -29,10 +29,10 @@ export class Success extends Component {
 			<
 			AppBar title = "Success" / >
 			<
-			h1 > Thank You For Your Submission < /h1> <
-			/Dialog> <
-			/React.Fragment> <
-			/MuiThemeProvider>
+			h1 > Thank You For Your Submission < /h1> < /
+			Dialog > <
+			/React.Fragment> < /
+			MuiThemeProvider >
 		);
 	}
 }
