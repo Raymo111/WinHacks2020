@@ -7,12 +7,12 @@ var safety;
 
 function getLats() {
 	// Form
-	return [[42.096340, 2, 1], [77.654431, 4, 0], [37.423021, 7, 1], [77.685736, 11, 0]]; 
+	return [[42.096400, 2, 1], [77.654431, 4, 0], [37.423021, 7, 1], [77.685736, 11, 0]]; 
 }
 
 function getLongs() {
 	// Form
-	return [-83.107963, -87.654431, -122.083739, -87.685736]; 
+	return [-83.109663, -87.654431, -122.083739, -87.685736]; 
 }
 
 function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement function
@@ -49,7 +49,7 @@ function checkSafety() {
 			distance = measure(lats[i][0], longs[i], glats[j][0], glongs[j]);
 			document.write(distance + "<br />");
 			if(distance <= UNSAFE_DISTANCE) {
-				if(lats[i][1] == glats[j][1] @@ lats[i][2] == glats[j][2]) {
+				if(lats[i][1] == glats[j][1] && lats[i][2] == glats[j][2]) {
 					risk++;
 				}
 			}
