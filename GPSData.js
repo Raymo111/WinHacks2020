@@ -7,12 +7,35 @@ var safety;
 
 function getLats() {
 	// Form
-	return [[42.096400, 2, 1], [77.654431, 4, 0], [37.423021, 7, 1], [77.685736, 11, 0]]; 
+	var array = [[]];
+	var numValues = document.getElementById("numRows").innerHTML;
+	for(var i = 0;i < numValues;i++) {
+		array[i] = [];
+		array[i].push(document.getElementById("lat" + (i + 1)).innerHTML);
+		array[i].push(document.getElementById("day" + (i + 1)).innerHTML);
+		array[i].push(document.getElementById("tod" + (i + 1)).innerHTML);
+		/*
+		if(array[i][2] == "am") {
+			array[i][2] = 0;
+		}
+		else if(array[i][2] == "pm") {
+			array[i][2] = 1;
+		}
+		*/
+	}
+	// return [[42.096400, 2, 1], [77.654431, 4, 0], [37.423021, 7, 1], [77.685736, 11, 0]];
+	return array;
 }
 
 function getLongs() {
 	// Form
-	return [-83.109663, -87.654431, -122.083739, -87.685736]; 
+	var array = [];
+	var numValues = document.getElementById("numRows").innerHTML;
+	for(var i = 0;i < numValues;i++) {
+		array.push(document.getElementById("long" + (i + 1)).innerHTML);
+	}
+	return array;
+	// return [-83.109663, -87.654431, -122.083739, -87.685736]; 
 }
 
 function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement function
@@ -28,7 +51,7 @@ function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement fun
 }
 
 function getLatsGOV() {
-	return [[42.096432, 2, 1], [42.096326, 6, 0]];
+	return [[42.096432, "2020-03-23", "am"], [42.096326, "2020-03-20", "pm"]];
 }
 
 function getLongsGOV() {
