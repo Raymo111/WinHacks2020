@@ -14,6 +14,10 @@ if($conn->connect_error){  // check for db connection error
 }
 
 for($counter = 1; $counter <= count($_POST)/4; $counter++){
+   // check if values exist
+   if(!(isset($_POST["lat{$counter}"]))){
+      continue;
+   }
    // prepare query
    $query = $conn->prepare("INSERT INTO affected_area VALUES (?, ?, ?, ?);");
    $query->bind_param("ssdd", $_POST["date{$counter}"], $_POST["time{$counter}"],
