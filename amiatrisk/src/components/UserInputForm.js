@@ -36,8 +36,10 @@ export class UserInputForm extends Component {
 			<
 			TextField id = "date"
 			label = "Date"
+			onChange = {
+				handleChange('date')
+			}
 			type = "date"
-			defaultValue = "2017-05-24"
 			//  className={classes.textField}
 			InputLabelProps = {
 				{
@@ -56,8 +58,10 @@ export class UserInputForm extends Component {
 			<
 			TextField id = "time"
 			label = "Time"
+			onChange = {
+				handleChange('time')
+			}
 			type = "time"
-			defaultValue = "07:30"
 			//     className={classes.textField}
 			InputLabelProps = {
 				{

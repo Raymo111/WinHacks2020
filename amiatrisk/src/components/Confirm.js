@@ -26,12 +26,10 @@ export class Confirm extends Component {
 	render() {
 		const {
 			values: {
-				firstName,
-				lastName,
-				email,
 				date,
 				time,
-				location
+				lat,
+				long
 			}
 		} = this.props;
 		return ( <
@@ -49,52 +47,36 @@ export class Confirm extends Component {
 			<
 			ListItem >
 			<
-			ListItemText primary = "First Name"
-			secondary = {
-				firstName
-			}
-			/>  <
-			/ListItem> <
-			ListItem >
-			<
-			ListItemText primary = "Last Name"
-			secondary = {
-				lastName
-			}
-			/>  <
-			/ListItem> <
-			ListItem >
-			<
-			ListItemText primary = "Email"
-			secondary = {
-				email
-			}
-			/>  <
-			/ListItem> <
-			ListItem >
-			<
 			ListItemText primary = "Date"
 			secondary = {
 				date
 			}
-			/>  <
-			/ListItem> <
+			/>  < /
+			ListItem > <
 			ListItem >
 			<
 			ListItemText primary = "Time"
 			secondary = {
 				time
 			}
-			/>  <
-			/ListItem> <
+			/>  < /
+			ListItem > <
 			ListItem >
 			<
-			ListItemText primary = "Location"
+			ListItemText primary = "Latitude"
 			secondary = {
-				location
+				lat
 			}
-			/>  <
-			/ListItem> <
+			/>  < /
+			ListItem > <
+			ListItem >
+			<
+			ListItemText primary = "Longitude"
+			secondary = {
+				long
+			}
+			/>  < /
+			ListItem > <
 			/List> <
 			br / >
 
@@ -112,10 +94,10 @@ export class Confirm extends Component {
 			onClick = {
 				this.continue
 			} >
-			Confirm & Continue < /Button> <
-			/Dialog> <
-			/React.Fragment> <
-			/MuiThemeProvider>
+			Confirm & Continue < /Button> < /
+			Dialog > <
+			/React.Fragment> < /
+			MuiThemeProvider >
 		);
 	}
 }

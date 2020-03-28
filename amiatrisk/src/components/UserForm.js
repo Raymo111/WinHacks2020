@@ -44,12 +44,14 @@ export class UserForm extends Component {
 		const {
 			date,
 			time,
-			location
+			lat,
+			long
 		} = this.state;
 		const values = {
 			date,
 			time,
-			location
+			lat,
+			long
 		};
 		// eslint-disable-next-line
 
