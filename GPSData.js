@@ -5,14 +5,14 @@ var glats = [];
 var glongs = [];
 var safety;
 
-function getLats {
+function getLats() {
 	// Form
-	return [77.654432, 77.654431, 65.345676, 77.685736]; 
+	return [42.096340, 77.654431, 37.423021, 77.685736]; 
 }
 
-function getLongs {
+function getLongs() {
 	// Form
-	return [87.654432, 87.654431, 75.345676, 87.685736]; 
+	return [-83.107963, -87.654431, -122.083739, -87.685736]; 
 }
 
 function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement function
@@ -28,11 +28,11 @@ function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement fun
 }
 
 function getLatsGOV() {
-	return [77.654466, 77.548385];
+	return [42.096432, 42.096326];
 }
 
 function getLongsGOV() {
-	return [87.654466, 87.548385];
+	return [-83.109735, -83.107145];
 }
 
 function checkSafety() {
@@ -47,6 +47,7 @@ function checkSafety() {
 	for(var i = 0;i < lats.length;i++) {
 		for(var j = 0;j < glats.length;j++) {
 			distance = measure(lats[i], longs[i], glats[j], glongs[j]);
+			document.write(distance + "<br />");
 			if(distance <= UNSAFE_DISTANCE) {
 				risk++;
 			}
@@ -54,4 +55,19 @@ function checkSafety() {
 	}
 	
 	return risk;
+}
+
+function describePhysicalState(risk) {
+	if(risk <= 0) {
+		return "You are safe from the virus.";
+	}
+	else if(risk == 1) {
+		return "You are at the risk of catching the virus. Please stay at home to prevent further spreading the virus.";
+	}
+	else if(risk == 2) {
+		return "You are at a high risk.";
+	}
+	else if(risk >= 3) {
+		return "You're going to die.";
+	}
 }
