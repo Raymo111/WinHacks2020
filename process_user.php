@@ -22,7 +22,8 @@ if(!($query->execute())){  // upon sql failure
 }
 else{
    $result = $query->get_result();
-   for($counter = 1; $counter < count($_POST)/2; $counter++){
+   // form returns triples, so there are count($_POST)/3 triples
+   for($counter = 1; $counter < count($_POST)/3; $counter++){
       $user_latitude = round(doubleval($_POST["lat{$counter}"]), 2);
       $user_longitude = round(doubleval($_POST["long{$counter}"]), 2);
       // NOT DONE
