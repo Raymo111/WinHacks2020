@@ -1,13 +1,13 @@
 const UNSAFE_DISTANCE = 50;
-var lats = [];
+var lats = [[]];
 var longs = [];
-var glats = [];
+var glats = [[]];
 var glongs = [];
 var safety;
 
 function getLats() {
 	// Form
-	return [42.096340, 77.654431, 37.423021, 77.685736]; 
+	return [[42.096340, 2, 1], [77.654431, 4, 0], [37.423021, 7, 1], [77.685736, 11, 0]]; 
 }
 
 function getLongs() {
@@ -28,7 +28,7 @@ function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement fun
 }
 
 function getLatsGOV() {
-	return [42.096432, 42.096326];
+	return [[42.096432, 2, 1], [42.096326, 6, 0]];
 }
 
 function getLongsGOV() {
@@ -46,10 +46,12 @@ function checkSafety() {
 	
 	for(var i = 0;i < lats.length;i++) {
 		for(var j = 0;j < glats.length;j++) {
-			distance = measure(lats[i], longs[i], glats[j], glongs[j]);
+			distance = measure(lats[i][0], longs[i], glats[j][0], glongs[j]);
 			document.write(distance + "<br />");
 			if(distance <= UNSAFE_DISTANCE) {
-				risk++;
+				if(lats[i][1] == glats[j][1] @@ lats[i][2] == glats[j][2]) {
+					risk++;
+				}
 			}
 		}
 	}
