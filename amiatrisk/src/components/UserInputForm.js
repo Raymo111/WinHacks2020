@@ -73,13 +73,19 @@ export class UserInputForm extends Component {
 			form > <
 			br / >
 			<
-			TextField placeholder = "Enter Your Location (lat, long)"
-			label = "Location"
+			TextField placeholder = "Lat"
+			label = "Latitude"
 			onChange = {
-				handleChange('location')
+				handleChange('lat')
 			}
-			defaultValue = {
-				values.location
+			margin = "normal"
+			fullWidth = "true" /
+			>
+			<
+			TextField placeholder = "Long"
+			label = "Longitude"
+			onChange = {
+				handleChange('long')
 			}
 			margin = "normal"
 			fullWidth = "true" /
