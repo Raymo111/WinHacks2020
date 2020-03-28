@@ -16,7 +16,7 @@ $query = $conn->prepare("SELECT * FROM affected_area WHERE day BETWEEN
 
 // execute sql
 if(!($query->execute())){  // upon sql failure
-   die("SQL failure");
+   die("SQL failure: " . $query->error);
 }
 $result = $query->get_result();
 ?>
