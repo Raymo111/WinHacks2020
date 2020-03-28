@@ -9,8 +9,8 @@ $dbname = "am_i_at_risk";
 
 // connect to db
 $conn = new mysqli($servername, $username, $password, $dbname);
-if($conn->connect_error){
-	die("Connection failed: " . $conn->connect_error);
+if($conn->connect_error){  // check for db connection error
+	die("Connection failed: " . $conn->connect_error); // die upon db connect error
 }
 
 // prepare query
