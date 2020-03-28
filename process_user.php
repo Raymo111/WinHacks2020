@@ -41,3 +41,12 @@ else{
    }
 }
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+   <h1>Processing user form page</h2>
+   <p>Coords close to user: <?php print_r($close_coords); ?></p>
+</body>
+</html>
