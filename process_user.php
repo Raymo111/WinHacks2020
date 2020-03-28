@@ -13,12 +13,13 @@ if($conn->connect_error){
 // prepare query
 $query = $conn->prepare("SELECT * FROM affected_area;");
 
+$close_coords = array();   // array of coordinates near the user
+
 // execute sql
 if(!($query->execute())){  // upon sql failure
    die("SQL failure");
 }
 else{
-   $close_coords = array();   // array of coordinates near the user
    $result = $query->get_result();
 
    $user_latitude = round(doubleval($_POST['lat']), 2);
