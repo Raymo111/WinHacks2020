@@ -1,5 +1,5 @@
-CREATE DATABASE winhacks;
-use winhacks;
+CREATE DATABASE am_i_at_risk;
+use am_i_at_risk;
 
 CREATE TABLE affected_area (
 	day DATE NOT NULL,
