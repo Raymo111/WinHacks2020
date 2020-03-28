@@ -5,7 +5,7 @@ import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-export class FormUserDetails extends Component {
+export class UserInputForm extends Component {
   continue = e => {
     e.preventDefault();
     this.props.nextStep();
@@ -16,39 +16,40 @@ export class FormUserDetails extends Component {
     return (
       <MuiThemeProvider >
         <React.Fragment>
-          <Dialog 
+        <Dialog
             open="true"
             fullWidth="true"
             maxWidth='sm'
           >
-            <AppBar title="Enter User Details" />
+            <AppBar title="Enter Setting" />
             <TextField
-              placeholder="Enter Your First Name"
-              label="First Name"
-              onChange={handleChange('firstName')}
-              defaultValue={values.firstName}
+              placeholder="Enter Date (yyyy-mm-dd)"
+              label="Date"
+              onChange={handleChange('date')}
+              defaultValue={values.date}
+              margin="normal"
+              fullWidth="true"
+            />
+            <br />
+            <TextField
+              placeholder="Enter Time (00:00 AM/PM)"
+              label="Time"
+              onChange={handleChange('time')}
+              defaultValue={values.time}
               margin="normal"
 							fullWidth="true"
             />
             <br />
             <TextField
-              placeholder="Enter Your Last Name"
-              label="Last Name"
-              onChange={handleChange('lastName')}
-              defaultValue={values.lastName}
+              placeholder="Enter Your Location (lat, long)"
+              label="Location"
+              onChange={handleChange('location')}
+              defaultValue={values.location}
               margin="normal"
 							fullWidth="true"
             />
             <br />
-            <TextField
-              placeholder="Enter Your Email"
-              label="Email"
-              onChange={handleChange('email')}
-              defaultValue={values.email}
-              margin="normal"
-							fullWidth="true"
-            />
-            <br />
+
             <Button
               color="primary"
               variant="contained"
@@ -61,4 +62,4 @@ export class FormUserDetails extends Component {
   }
 }
 
-export default FormUserDetails;
+export default UserInputForm;
