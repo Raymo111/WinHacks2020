@@ -5,7 +5,7 @@
 $servername = "localhost";
 $username = "app";
 $password = "1234";
-$dbname = "winhacks";
+$dbname = "am_i_at_risk";
 
 // connect to db
 $conn = new mysqli($servername, $username, $password, $dbname);
