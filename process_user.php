@@ -10,8 +10,9 @@ if($conn->connect_error){
 	die("Connection failed: " . $conn->connect_error);
 }
 
-// prepare query
-$query = $conn->prepare("SELECT * FROM affected_area;");
+// prepare query: select all data from the last 14 days
+$query = $conn->prepare("SELECT * FROM affected_area WHERE day BETWEEN 
+   date_sub(now(), INTERVAL 14 DAY) AND now();");
 
 $close_coords = array();   // array of coordinates near the user
 
