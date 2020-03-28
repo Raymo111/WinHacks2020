@@ -30,7 +30,7 @@ export class UserInputForm extends Component {
 			AppBar title = "Enter Setting" / >
 			<
 			form className = {
-				FormSetting
+				UserInputForm
 			}
 			noValidate >
 			<
@@ -49,7 +49,7 @@ export class UserInputForm extends Component {
 
 			<
 			form className = {
-				FormSetting
+				UserInputForm
 			}
 			noValidate >
 
