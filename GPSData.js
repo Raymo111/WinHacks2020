@@ -5,8 +5,58 @@ var glats = [[]];
 var glongs = [];
 var safety;
 
-function getLats() {
-	// Form
+function getLats(numPlaces, id1, id2, id3) {
+	// return [[42.096432, "2020-03-23", "am"], [42.096326, "2020-03-20", "pm"]];
+	var arr = [[]];
+	for(var i = 0;i < numPlaces;i++) {
+		if(document.getElementById(id1 + (i + 1)).value == null || document.getElementById(id1 + (i + 1)).value == "") {
+			break;
+		}
+		else {
+			arr[i] = [];
+			// arr[i].push(document.getElementById(id1 + (i + 1)).value);
+			arr[i].push(3);
+			arr[i].push(document.getElementById(id2 + (i + 1)).value);
+			if(document.getElementById("am" + (i + 1)).checked) {
+				arr[i].push("am");
+			}
+			else if(document.getElementById("pm" + (i + 1)).checked) {
+				arr[i].push("pm");
+			}
+		}
+	}
+	return arr;
+}
+
+function getLongs(numPlaces) {
+	var arr = [];
+	
+	for(var i = 0;i < numPlaces;i++) {
+		if(document.getElementById("place" + (i + 1)).value == null || document.getElementById("place" + (i + 1)).value == "") {
+			break;
+		}
+		else {
+			arr.push(5);
+			// arr.push(document.getElementById("place" + (i + 1)).value);
+		}
+	}
+	return arr;
+	// return [-83.109663, -87.654431, -122.083739, -87.685736]; 
+}
+
+function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement function
+    var R = 6378.137; // Radius of earth in KM
+    var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
+    var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon/2) * Math.sin(dLon/2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    var d = R * c;
+    return d * 1000; // meters
+}
+
+function getLatsGOV() {
 	var array = [[]];
 	var numValues = document.getElementById("numRows").innerHTML;
 	for(var i = 0;i < numValues;i++) {
@@ -27,7 +77,7 @@ function getLats() {
 	return array;
 }
 
-function getLongs() {
+function getLongsGOV() {
 	// Form
 	var array = [];
 	var numValues = document.getElementById("numRows").innerHTML;
@@ -38,39 +88,18 @@ function getLongs() {
 	// return [-83.109663, -87.654431, -122.083739, -87.685736]; 
 }
 
-function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement function
-    var R = 6378.137; // Radius of earth in KM
-    var dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
-    var dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
-    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-    Math.sin(dLon/2) * Math.sin(dLon/2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    var d = R * c;
-    return d * 1000; // meters
-}
-
-function getLatsGOV() {
-	return [[42.096432, "2020-03-23", "am"], [42.096326, "2020-03-20", "pm"]];
-}
-
-function getLongsGOV() {
-	return [-83.109735, -83.107145];
-}
-
-function checkSafety() {
+function checkSafety(lats, longs) {
 	var risk = 0;
 	var distance = 0;
 	
-	lats = getLats();
-	longs = getLongs();
+	// lats = getLats();
+	// longs = getLongs();
 	glats = getLatsGOV();
 	glongs = getLongsGOV();
 	
 	for(var i = 0;i < lats.length;i++) {
 		for(var j = 0;j < glats.length;j++) {
 			distance = measure(lats[i][0], longs[i], glats[j][0], glongs[j]);
-			document.write(distance + "<br />");
 			if(distance <= UNSAFE_DISTANCE) {
 				if(lats[i][1] == glats[j][1] && lats[i][2] == glats[j][2]) {
 					risk++;

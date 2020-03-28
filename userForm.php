@@ -1,3 +1,21 @@
+<?php
+	$servername = "localhost";
+	$username = "app";
+	$password = "1234";
+	$dbname = "am_i_at_risk";
+
+	// connect to db
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	if($conn->connect_error){
+		die("Connection failed: " . $conn->connect_error);
+	}
+
+	// prepare query
+	// $query = $conn->prepare("SELECT * FROM affected_area;");
+	$query = "SELECT * FROM affected_area;";
+	$result = $conn->query($query) or die($conn->error.__LINE__);
+	$numResults = mysqli_num_rows($result);
+?>
 <!doctype html>
 <html>
 	<head>
@@ -6,10 +24,56 @@
 		<meta name="viewport" content="width=device-width">
 		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU=" crossorigin="anonymous" />
+		<script type="text/javascript" src="GPSData.js"></script>
 	</head>
 	<body>
+		<div id="secrets">
+			<p id="numRows" style="display: none;"><?php echo $numResults; ?></p>
+			<table id="lat" style="display: none;">
+			<?php
+				// Loop through results
+				$count = 0;
+				mysqli_data_seek($result, 0);
+				while($row = $result->fetch_assoc()) {
+					$count++;
+					echo '<tr>';
+					echo '<td id="lat'.$count.'">'.$row['latitude'].'</td>';
+					echo '<td id="day'.$count.'">'.$row['day'].'</td>';
+					echo '<td id="tod'.$count.'">'.$row['time_of_day'].'</td>';
+					echo '</tr>';
+					// echo $row['day'].'|'.$row['time_of_day'].'|'.$row['latitude'].'|<br />';
+				}
+				mysqli_data_seek($result, 0);
+			?>
+			</table>
+			<table id="long" style="display: none;">
+			<?php
+				// Loop through results
+				$count = 0;
+				mysqli_data_seek($result, 0);
+				while($row = $result->fetch_assoc()) {
+					$count++;
+					echo '<tr>';
+					echo '<td id="long'.$count.'">'.$row['longitude'].'</td>';
+					echo '</tr>';
+					// echo $row['day'].'|'.$row['time_of_day'].'|'.$row['latitude'].'|<br />';
+				}
+				mysqli_data_seek($result, 0);
+			?>
+			</table>
+		</div>
 		<script type="text/javascript">
 			var numPlaces = 4;
+			
+			function done() {
+				lats = getLats(numPlaces, "place", "date", "t");
+				longs = getLongs(numPlaces);
+				console.log(lats);
+				console.log(longs);
+				
+				document.getElementById("safety").style.display = "block";
+				document.getElementById("safety").innerHTML = describePhysicalState(checkSafety(lats, longs));
+			}
 			
 			function addPlace() {
 				numPlaces++;
@@ -51,6 +115,7 @@
 				
 				var group3 = document.createElement("DIV");
 				group3.className = "form-group";
+				group3.id = "t" + numPlaces;
 				
 				var label3 = document.createElement("LABEL");
 				label3.className = "custom-control-label";
@@ -119,6 +184,7 @@
 			  </div>
 			</nav>
 			<br /><br /><br />
+			<h2 id="safety" style="display: none;"></h2>
 			<form>
 				<div class="form-group">
 					<label>Please enter the various places you visited in the past 14 days.</label>
@@ -132,14 +198,14 @@
 						<label class="custom-control-label">Enter the day you visited this place.</label>
 						<input type="date" class="form-control" id="date1"></input>
 					</div>
-					<div class="form-group">
+					<div class="form-group" id="t1">
 						<label class="custom-control-label">Did you visit in the morning (A.M. times) or the afternoon (P.M. times)?</label>
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="am1" name="time1" checked>
+							<input type="radio" class="custom-control-input" id="am1" name="time1" value="am">
 							<label class="custom-control-label" for="am1">Morning</label>
 						</div>
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="pm1" name="time1" checked>
+							<input type="radio" class="custom-control-input" id="pm1" name="time1" value="pm">
 							<label class="custom-control-label" for="pm1">Afternoon</label>
 						</div>
 					</div>
@@ -155,14 +221,14 @@
 						<label class="custom-control-label">Enter the day you visited this place.</label>
 						<input type="date" class="form-control" id="date2"></input>
 					</div>
-					<div class="form-group">
+					<div class="form-group" id="t2">
 						<label class="custom-control-label">Did you visit in the morning (A.M. times) or the afternoon (P.M. times)?</label>
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="am2" name="time2" checked>
+							<input type="radio" class="custom-control-input" id="am2" name="time2" value="am">
 							<label class="custom-control-label" for="am2">Morning</label>
 						</div>
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="pm2" name="time2" checked>
+							<input type="radio" class="custom-control-input" id="pm2" name="time2" value="pm">
 							<label class="custom-control-label" for="pm2">Afternoon</label>
 						</div>
 					</div>
@@ -178,14 +244,14 @@
 						<label class="custom-control-label">Enter the day you visited this place.</label>
 						<input type="date" class="form-control" id="date3"></input>
 					</div>
-					<div class="form-group">
+					<div class="form-group" id="t3">
 						<label class="custom-control-label">Did you visit in the morning (A.M. times) or the afternoon (P.M. times)?</label>
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="am3" name="time3" checked>
+							<input type="radio" class="custom-control-input" id="am3" name="time3" value="am">
 							<label class="custom-control-label" for="am3">Morning</label>
 						</div>
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="pm3" name="time3" checked>
+							<input type="radio" class="custom-control-input" id="pm3" name="time3" value="pm">
 							<label class="custom-control-label" for="pm3">Afternoon</label>
 						</div>
 					</div>
@@ -201,14 +267,14 @@
 						<label class="custom-control-label">Enter the day you visited this place.</label>
 						<input type="date" class="form-control" id="date4"></input>
 					</div>
-					<div class="form-group">
+					<div class="form-group" id="t4">
 						<label class="custom-control-label">Did you visit in the morning (A.M. times) or the afternoon (P.M. times)?</label>
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="am4" name="time4" checked>
+							<input type="radio" class="custom-control-input" id="am4" name="time4" value="am">
 							<label class="custom-control-label" for="am4">Morning</label>
 						</div>
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="pm4" name="time4" checked>
+							<input type="radio" class="custom-control-input" id="pm4" name="time4" value="pm">
 							<label class="custom-control-label" for="pm4">Afternoon</label>
 						</div>
 					</div>
@@ -218,9 +284,9 @@
 				<div id="addedPlaces"></div>
 				
 				<button type="button" onclick="addPlace();">Add Place</button>
+				<button type="button" onclick="done();">Submit</button>
 				
-				
-				<button type="submit" class="btn btn-primary">Submit</button>
+				<!--<button type="submit" class="btn btn-primary">Submit</button>-->
 			</form>
 		</div>
 	</body>
