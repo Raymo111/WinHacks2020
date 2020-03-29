@@ -5,7 +5,7 @@ var glats = [[]];
 var glongs = [];
 var safety;
 
-function getLats(numPlaces, id1, id2, id3) {
+async function getLats(numPlaces, id1, id2, id3) {
 	// return [[42.096432, "2020-03-23", "am"], [42.096326, "2020-03-20", "pm"]];
 	var arr = [[]];
 	for(var i = 0;i < numPlaces;i++) {
@@ -29,7 +29,7 @@ function getLats(numPlaces, id1, id2, id3) {
 	return arr;
 }
 
-function getLongs(numPlaces) {
+async function getLongs(numPlaces) {
 	var arr = [];
 
 	for(var i = 0;i < numPlaces;i++) {
