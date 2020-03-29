@@ -181,7 +181,7 @@
 				document.getElementById("addedPlaces").removeChild(br);
 			}
 
-			var input = document.getElementById('place1');
+			var input = document.getElementById("place1");
 			var options = {
 				//types: ['establishment']
 			};
