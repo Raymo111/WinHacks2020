@@ -149,12 +149,12 @@
 				label5.for = pmInput.id;
 				label5.innerHTML = "Afternoon";
 
-				var rmButton = document.createElement("BUTTON");
+				var rmButton = document.createElement("BUTTON"),
+				br = document.createElement('br');
 				rmButton.type = "button";
 				rmButton.addEventListener('click', function() {
 					rmPlace(document.getElementById(place.id));
 				}, false);
-				//rmButton.onclick = "rmPlace(document.getElementById(" + place.id + "));";
 				rmButton.innerHTML = "Remove Place";
 
 				pmDiv.appendChild(pmInput);
@@ -169,14 +169,13 @@
 				place.appendChild(group3);
 
 				place.appendChild(rmButton);
+				place.appendChild(br);
 
 				document.getElementById("addedPlaces").appendChild(place);
 			}
 
 			function rmPlace(place) {
 				numPlaces--;
-				console.log(numPlaces);
-				console.log(place);
 				document.getElementById("addedPlaces").removeChild(place);
 			}
 		</script>
