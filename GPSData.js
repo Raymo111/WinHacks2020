@@ -130,7 +130,8 @@ function describePhysicalState(risk) {
 async function geocode(address) {
 	const gc = await fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + encodeURI(address) + "&key=AIzaSyAXvfcLocR75KjYmwY7S-LN4wt96ZAhQ-Q")
 		.then(function(response) {
-			return response.json()["geometry"]["location"];
+			return response.json();
 		});
-	return [gc["lat"], gc["lng"]];
+	console.log(gc);
+	return [gc["geometry"]["location"]["lat"], gc["geometry"]["location"]["lng"]];
 }
