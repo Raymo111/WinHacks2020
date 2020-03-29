@@ -185,6 +185,7 @@
 			function rmPlace(place) {
 				document.getElementById("addedPlaces").removeChild(place);
 				document.getElementById("addedPlaces").removeChild(br);
+				numPlaces--;
 			}
 
 		</script>
