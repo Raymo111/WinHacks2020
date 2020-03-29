@@ -173,7 +173,7 @@
 				place.appendChild(rmButton);
 
 				document.getElementById("addedPlaces").appendChild(place);
-				document.getElementById("addedPlaces").appendChild(br);
+				place.appendChild(br);
 
 				var input = document.getElementById("place" + numPlaces);
 				var options = {
