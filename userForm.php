@@ -65,6 +65,7 @@
 		</div>
 		<script type="text/javascript">
 			var numPlaces = 1;
+			var autocompletes = [];
 
 			function done() {
 				lats = getLats(numPlaces, "place", "date", "t");
@@ -173,10 +174,15 @@
 
 				document.getElementById("addedPlaces").appendChild(place);
 				document.getElementById("addedPlaces").appendChild(br);
+
+				var input = document.getElementById("place" + numPlaces);
+				var options = {
+					//types: ['establishment']
+				};
+				autocompletes[numPlaces] = new google.maps.places.Autocomplete(input, options);
 			}
 
 			function rmPlace(place) {
-				numPlaces--;
 				document.getElementById("addedPlaces").removeChild(place);
 				document.getElementById("addedPlaces").removeChild(br);
 			}
