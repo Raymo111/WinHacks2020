@@ -152,7 +152,7 @@
 				var rmButton = document.createElement("BUTTON");
 				rmButton.type = "button";
 				rmButton.onclick = "rmPlace(document.getElementById(" + place.id + "));";
-				rmButton.innerHTML = Remove Place;
+				rmButton.innerHTML = "Remove Place";
 
 				pmDiv.appendChild(pmInput);
 				pmDiv.appendChild(label5);
