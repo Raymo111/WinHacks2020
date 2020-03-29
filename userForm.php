@@ -91,7 +91,7 @@
 				address.type = "text";
 				address.className = "form-control";
 				address.id = "place" + numPlaces;
-				address.placeholder = "Enter Address of Place you Visited";
+				address.placeholder = "Start typing to serach for the place you visited...";
 
 				group1.appendChild(label1);
 				group1.appendChild(address);
@@ -181,13 +181,6 @@
 				document.getElementById("addedPlaces").removeChild(br);
 			}
 
-			var input = document.getElementById("place1");
-			var options = {
-				//types: ['establishment']
-			};
-
-			autocomplete = new google.maps.places.Autocomplete(input, options);
-
 		</script>
 		<div class="container">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -234,6 +227,14 @@
 					</div>
 				</div>
 				<br />
+
+				<script>
+					var input = document.getElementById("place1");
+					var options = {
+						//types: ['establishment']
+					};
+					autocomplete = new google.maps.places.Autocomplete(input, options);
+				</script>
 
 				<div id="addedPlaces"></div>
 
