@@ -24,9 +24,9 @@
 		<meta name="viewport" content="width=device-width">
 
 		<!-- socials -->
-		<meta property="og:title" content="Check your travel history">
+		<meta property="og:title" content="Check your travel history!">
 		<meta property="og:site_name" content="Am I at risk?">
-		<meta property="og:url" content="https://stopcovid19bysocialdistancingandconnecting.online/index.html">
+		<meta property="og:url" content="https://stopcovid19bysocialdistancingandconnecting.online/userForm.php">
 		<meta property="og:image" content="/images/splash.png">
 		<meta property="og:description" content="Check if you're at risk of carrying COViD-19!">
 		<meta name="twitter:card" content="summary_large_image">
@@ -172,7 +172,7 @@
 				label5.setAttribute("for", pmInput.id);
 				label4.id = "pml" + numPlaces;
 				label5.innerHTML = "Afternoon";
-				
+
 				/*
 				var rmButton = document.createElement("BUTTON");
 				// br = document.createElement('br');
@@ -205,16 +205,16 @@
 				};
 				autocompletes[numPlaces] = new google.maps.places.Autocomplete(input, options);
 			}
-			
+
 			/*
 			function rmPlace(id, num) {
 				document.getElementById("addedPlaces").removeChild(document.getElementById(id));
 				//document.getElementById("addedPlaces").removeChild(br);
 				console.log(num + " " + numPlaces);
-				
+
 				if(num < numPlaces) {
 					difference = numPlaces - num;
-					
+
 					for(var i = 0;i < difference;i++) {
 						var temp = num + 1;
 						document.getElementById("p" + temp).id = ("p" + num);

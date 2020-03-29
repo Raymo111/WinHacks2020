@@ -24,9 +24,9 @@
 		<meta name="viewport" content="width=device-width">
 
 		<!-- socials -->
-		<meta property="og:title" content="Check your travel history">
+		<meta property="og:title" content="Check your travel history!">
 		<meta property="og:site_name" content="Am I at risk?">
-		<meta property="og:url" content="https://stopcovid19bysocialdistancingandconnecting.online/index.html">
+		<meta property="og:url" content="https://stopcovid19bysocialdistancingandconnecting.online/userForm.php">
 		<meta property="og:image" content="/images/splash.png">
 		<meta property="og:description" content="Check if you're at risk of carrying COViD-19!">
 		<meta name="twitter:card" content="summary_large_image">
@@ -37,6 +37,11 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU=" crossorigin="anonymous" />
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXvfcLocR75KjYmwY7S-LN4wt96ZAhQ-Q&libraries=places"></script>
 		<script type="text/javascript" src="GPSData.js"></script>
+		<style>
+			button {
+				margin: 10px;
+			}
+		</style>
 	</head>
 	<body>
 		<div id="secrets">
@@ -81,9 +86,12 @@
 			function done() {
 				lats = getLats(numPlaces, "place", "date", "t");
 				longs = getLongs(numPlaces);
+				console.log(lats);
+				console.log(longs);
 
 				document.getElementById("safety").style.display = "block";
 				document.getElementById("safety").innerHTML = describePhysicalState(checkSafety(lats, longs));
+				alert(describePhysicalState(checkSafety(lats, longs)));
 			}
 
 			function addPlace() {
@@ -96,6 +104,7 @@
 
 				var label1 = document.createElement("LABEL");
 				label1.className = "custom-control-label";
+				label1.id = "pl" + numPlaces;
 				label1.style.fontWeight = "bold";
 				label1.innerHTML = "Place " + numPlaces;
 
@@ -129,7 +138,7 @@
 
 				var label3 = document.createElement("LABEL");
 				label3.className = "custom-control-label";
-				label3.innerHTML = "Did you visit in the morning (A.M. times) or the afternoon (P.M. times)? ";
+				label3.innerHTML = "Did you visit in the morning (A.M. times) or the afternoon (P.M. times)?  ";
 
 				var amDiv = document.createElement("DIV");
 				amDiv.className = "custom-control custom-radio custom-control-inline";
@@ -143,6 +152,7 @@
 				var label4 = document.createElement("LABEL");
 				label4.className = "custom-control-label";
 				label4.setAttribute("for", amInput.id);
+				label4.id = "aml" + numPlaces;
 				label4.innerHTML = "Morning";
 
 				amDiv.appendChild(amInput);
@@ -160,15 +170,20 @@
 				var label5 = document.createElement("LABEL");
 				label5.className = "custom-control-label";
 				label5.setAttribute("for", pmInput.id);
+				label4.id = "pml" + numPlaces;
 				label5.innerHTML = "Afternoon";
 
-				var rmButton = document.createElement("BUTTON"),
-				br = document.createElement('br');
-				rmButton.type = "button";
+				/*
+				var rmButton = document.createElement("BUTTON");
+				// br = document.createElement('br');
+				rmButton.setAttribute("type", "button");
+				rmButton.value = numPlaces;
+				rmButton.setAttribute("onclick", "rmPlace(\"p\" + this.value, this.value);");
 				rmButton.addEventListener('click', function() {
-					rmPlace(document.getElementById(place.id));
+					rmPlace(document.getElementById(place.id, numPlaces));
 				}, false);
 				rmButton.innerHTML = "Remove Place";
+				*/
 
 				pmDiv.appendChild(pmInput);
 				pmDiv.appendChild(label5);
@@ -181,22 +196,47 @@
 				place.appendChild(group2);
 				place.appendChild(group3);
 
-				place.appendChild(rmButton);
-
 				document.getElementById("addedPlaces").appendChild(place);
-				place.appendChild(br);
+				// document.getElementById("addedPlaces").appendChild(br);
 
 				var input = document.getElementById("place" + numPlaces);
 				var options = {
-					//types: ['establishment']
+					// types: ['establishment']
 				};
 				autocompletes[numPlaces] = new google.maps.places.Autocomplete(input, options);
 			}
 
-			function rmPlace(place) {
-				document.getElementById("addedPlaces").removeChild(place);
-			}
+			/*
+			function rmPlace(id, num) {
+				document.getElementById("addedPlaces").removeChild(document.getElementById(id));
+				//document.getElementById("addedPlaces").removeChild(br);
+				console.log(num + " " + numPlaces);
 
+				if(num < numPlaces) {
+					difference = numPlaces - num;
+
+					for(var i = 0;i < difference;i++) {
+						var temp = num + 1;
+						document.getElementById("p" + temp).id = ("p" + num);
+						document.getElementById("pl" + temp).innerHTML = "Place " + num;
+						document.getElementById("pl" + temp).id = "pl" + num;
+						document.getElementById("place" + temp).id = "place" + num;
+						document.getElementById("date" + temp).id = "date" + num;
+						document.getElementById("t" + temp).id = "t" + num;
+						document.getElementById("am" + temp).name = "time" + num;
+						document.getElementById("am" + temp).id = "am" + num;
+						document.getElementById("pm" + temp).name = "time" + num;
+						document.getElementById("pm" + temp).id = "pm" + num;
+						document.getElementById("aml" + temp).setAttribute("for", "am" + num);
+						document.getElementById("aml" + temp).id = "aml" + num;
+						document.getElementById("pml" + temp).setAttribute("for", "pm" + num);
+						document.getElementById("pml" + temp).id = "pml" + num;
+						num++;
+					}
+				}
+				numPlaces--;
+			}
+			*/
 		</script>
 		<div class="container">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -223,8 +263,15 @@
 				</div>
 				<div id="p1">
 					<div class="form-group">
-						<label class="custom-control-label"><b>Place 1</b></label>
+						<label class="custom-control-label" id="pl1"><b>Place 1</b></label>
 						<input type="text" class="form-control" id="place1" placeholder="Start typing to serach for the place you visited..."></input>
+						<script>
+							var input = document.getElementById("place1");
+							var options = {
+								//types: ['establishment']
+							};
+							autocomplete = new google.maps.places.Autocomplete(input, options);
+						</script>
 					</div>
 					<div class="form-group">
 						<label class="custom-control-label">Enter the day you visited this place.</label>
@@ -234,23 +281,14 @@
 						<label class="custom-control-label">Did you visit in the morning (A.M. times) or the afternoon (P.M. times)?</label>
 						<div class="custom-control custom-radio custom-control-inline">
 							<input type="radio" class="custom-control-input" id="am1" name="time1" value="am">
-							<label class="custom-control-label" for="am1">Morning</label>
+							<label class="custom-control-label" for="am1" id="aml1">Morning</label>
 						</div>
 						<div class="custom-control custom-radio custom-control-inline">
 							<input type="radio" class="custom-control-input" id="pm1" name="time1" value="pm">
-							<label class="custom-control-label" for="pm1">Afternoon</label>
+							<label class="custom-control-label" for="pm1" id="pml1">Afternoon</label>
 						</div>
 					</div>
 				</div>
-				<br />
-
-				<script>
-					var input = document.getElementById("place1");
-					var options = {
-						//types: ['establishment']
-					};
-					autocomplete = new google.maps.places.Autocomplete(input, options);
-				</script>
 
 				<div id="addedPlaces"></div>
 
