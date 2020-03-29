@@ -258,9 +258,10 @@
 				</ul>
 			  </div>
 			</nav>
+			<br /><br /><br />
 			<h2 id="safety" style="display: none;"></h2>
 			<form>
-				<div class="form-group" style="padding: 20vh 0 0 0;">
+				<div class="form-group" style="padding: 2vh 0 0 0;">
 					<label>Please enter the various places you visited in the past 14 days.</label>
 				</div>
 				<div id="p1">
