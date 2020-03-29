@@ -151,7 +151,7 @@
 
 				var rmButton = document.createElement("BUTTON");
 				rmButton.type = "button";
-				button.addEventListener('click', function() {
+				rmButton.addEventListener('click', function() {
 					rmPlace(document.getElementById(place.id));
 				}, false);
 				//rmButton.onclick = "rmPlace(document.getElementById(" + place.id + "));";
