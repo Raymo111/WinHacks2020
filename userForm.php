@@ -19,7 +19,7 @@
 <!doctype html>
 <html>
 	<head>
-		<title>Title</title>
+		<title>Am I At Risk?</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width">
 		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -116,7 +116,7 @@
 
 				var label3 = document.createElement("LABEL");
 				label3.className = "custom-control-label";
-				label3.innerHTML = "Did you visit in the morning (A.M. times) or the afternoon (P.M. times)?";
+				label3.innerHTML = "Did you visit in the morning (A.M. times) or the afternoon (P.M. times)? ";
 
 				var amDiv = document.createElement("DIV");
 				amDiv.className = "custom-control custom-radio custom-control-inline";
@@ -129,7 +129,7 @@
 
 				var label4 = document.createElement("LABEL");
 				label4.className = "custom-control-label";
-				label4.for = amInput.id;
+				label4.setAttribute("for", amInput.id);
 				label4.innerHTML = "Morning";
 
 				amDiv.appendChild(amInput);
@@ -146,7 +146,7 @@
 
 				var label5 = document.createElement("LABEL");
 				label5.className = "custom-control-label";
-				label5.for = pmInput.id;
+				label5.setAttribute("for", pmInput.id);
 				label5.innerHTML = "Afternoon";
 
 				var rmButton = document.createElement("BUTTON"),
