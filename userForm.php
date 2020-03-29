@@ -165,6 +165,8 @@
 				place.appendChild(group2);
 				place.appendChild(group3);
 
+				place.appendChild(rmButton);
+
 				document.getElementById("addedPlaces").appendChild(place);
 			}
 
