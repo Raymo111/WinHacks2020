@@ -132,6 +132,5 @@ async function geocode(address) {
 		.then(function(response) {
 			return response.json();
 		});
-	console.log(gc);
 	return [gc["results"][0]["geometry"]["location"]["lat"], gc["results"][0]["geometry"]["location"]["lng"]];
 }
