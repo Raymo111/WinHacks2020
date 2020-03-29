@@ -63,7 +63,7 @@
 			</table>
 		</div>
 		<script type="text/javascript">
-			var numPlaces = 4;
+			var numPlaces = 1;
 
 			function done() {
 				lats = getLats(numPlaces, "place", "date", "t");
