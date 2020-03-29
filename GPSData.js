@@ -14,9 +14,7 @@ async function getLats(numPlaces, id1, id2, id3) {
 		}
 		else {
 			arr[i] = [];
-			var a = await geocode(document.getElementById(id1 + (i + 1)).value);
-			var la = a[0];
-			arr[i].push(la);
+			arr[i].push(await geocode(document.getElementById(id1 + (i + 1)).value)[0]);
 			arr[i].push(await geocode(document.getElementById(id2 + (i + 1)).value));
 			if(document.getElementById("am" + (i + 1)).checked) {
 				arr[i].push("am");
@@ -37,9 +35,7 @@ async function getLongs(numPlaces) {
 			break;
 		}
 		else {
-			var a = await geocode(document.getElementById("place" + (i + 1)).value);
-			var lo = a[1];
-			arr[i].push(lo);
+			arr[i].push(await geocode(document.getElementById("place" + (i + 1)).value)[1]);
 			// arr.push(document.getElementById("place" + (i + 1)).value);
 		}
 	}
