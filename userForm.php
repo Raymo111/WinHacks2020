@@ -227,7 +227,6 @@
 
 				<div id="addedPlaces"></div>
 
-				<br />
 				<button type="button" onclick="addPlace();">Add Place</button>
 				<button type="button" onclick="done();">Submit</button>
 
