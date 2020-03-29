@@ -149,6 +149,14 @@
 				label5.setAttribute("for", pmInput.id);
 				label5.innerHTML = "Afternoon";
 
+				var rmButton = document.createElement("BUTTON"),
+				br = document.createElement('br');
+				rmButton.type = "button";
+				rmButton.addEventListener('click', function() {
+					rmPlace(document.getElementById(place.id));
+				}, false);
+				rmButton.innerHTML = "Remove Place";
+
 				pmDiv.appendChild(pmInput);
 				pmDiv.appendChild(label5);
 
@@ -160,7 +168,16 @@
 				place.appendChild(group2);
 				place.appendChild(group3);
 
+				place.appendChild(rmButton);
+
 				document.getElementById("addedPlaces").appendChild(place);
+				document.getElementById("addedPlaces").appendChild(br);
+			}
+
+			function rmPlace(place) {
+				numPlaces--;
+				document.getElementById("addedPlaces").removeChild(place);
+				document.getElementById("addedPlaces").removeChild(br);
 			}
 		</script>
 		<div class="container">
@@ -211,7 +228,6 @@
 
 				<div id="addedPlaces"></div>
 
-				<br />
 				<button type="button" onclick="addPlace();">Add Place</button>
 				<button type="button" onclick="done();">Submit</button>
 
