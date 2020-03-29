@@ -151,7 +151,10 @@
 
 				var rmButton = document.createElement("BUTTON");
 				rmButton.type = "button";
-				rmButton.onclick = "rmPlace(document.getElementById(" + place.id + "));";
+				button.addEventListener('click', function() {
+					rmPlace(document.getElementById(place.id));
+				}, false);
+				//rmButton.onclick = "rmPlace(document.getElementById(" + place.id + "));";
 				rmButton.innerHTML = "Remove Place";
 
 				pmDiv.appendChild(pmInput);
@@ -172,6 +175,8 @@
 
 			function rmPlace(place) {
 				numPlaces--;
+				console.log(numPlaces);
+				console.log(place);
 				document.getElementById("addedPlaces").removeChild(place);
 			}
 		</script>
@@ -223,6 +228,7 @@
 
 				<div id="addedPlaces"></div>
 
+				<br />
 				<button type="button" onclick="addPlace();">Add Place</button>
 				<button type="button" onclick="done();">Submit</button>
 
