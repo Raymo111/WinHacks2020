@@ -80,6 +80,7 @@
 			</table>
 		</div>
 		<script type="text/javascript">
+			console.log(geocode("Walmart Amherstburg Supercentre, Sandwich Street South, Amherstburg, ON, Canada"));
 			var numPlaces = 1;
 			var autocompletes = [];
 
@@ -255,10 +256,9 @@
 				</ul>
 			  </div>
 			</nav>
-			<br /><br /><br />
 			<h2 id="safety" style="display: none;"></h2>
 			<form>
-				<div class="form-group">
+				<div class="form-group" style="padding: 20vh 0 0 0;">
 					<label>Please enter the various places you visited in the past 14 days.</label>
 				</div>
 				<div id="p1">

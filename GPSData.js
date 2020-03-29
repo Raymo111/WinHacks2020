@@ -5,7 +5,7 @@ var glats = [[]];
 var glongs = [];
 var safety;
 
-function getLats(numPlaces, id1, id2, id3) {
+async function getLats(numPlaces, id1, id2, id3) {
 	// return [[42.096432, "2020-03-23", "am"], [42.096326, "2020-03-20", "pm"]];
 	var arr = [[]];
 	for(var i = 0;i < numPlaces;i++) {
@@ -14,10 +14,8 @@ function getLats(numPlaces, id1, id2, id3) {
 		}
 		else {
 			arr[i] = [];
-			var a = geocode(document.getElementById(id1 + (i + 1)).value);
-			var la = a[0];
-			arr[i].push(la);
-			arr[i].push(geocode(document.getElementById(id2 + (i + 1)).value));
+			arr[i].push(await geocode(document.getElementById(id1 + (i + 1)).value)[0]);
+			arr[i].push(await geocode(document.getElementById(id2 + (i + 1)).value));
 			if(document.getElementById("am" + (i + 1)).checked) {
 				arr[i].push("am");
 			}
@@ -29,7 +27,7 @@ function getLats(numPlaces, id1, id2, id3) {
 	return arr;
 }
 
-function getLongs(numPlaces) {
+async function getLongs(numPlaces) {
 	var arr = [];
 
 	for(var i = 0;i < numPlaces;i++) {
@@ -37,9 +35,7 @@ function getLongs(numPlaces) {
 			break;
 		}
 		else {
-			var a = geocode(document.getElementById("place" + (i + 1)).value);
-			var lo = a[1];
-			arr[i].push(lo);
+			arr[i].push(await geocode(document.getElementById("place" + (i + 1)).value)[1]);
 			// arr.push(document.getElementById("place" + (i + 1)).value);
 		}
 	}
