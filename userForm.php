@@ -6,8 +6,8 @@
 
 	// connect to db
 	$conn = new mysqli($servername, $username, $password, $dbname);
-	if($conn->connect_error){
-		die("Connection failed: " . $conn->connect_error);
+	if($conn->connect_error) {
+		die("Sorry, an internal error occured. Please try again!");
 	}
 
 	// prepare query
@@ -64,106 +64,113 @@
 		</div>
 		<script type="text/javascript">
 			var numPlaces = 4;
-			
+
 			function done() {
 				lats = getLats(numPlaces, "place", "date", "t");
 				longs = getLongs(numPlaces);
-				console.log(lats);
-				console.log(longs);
-				
+
 				document.getElementById("safety").style.display = "block";
 				document.getElementById("safety").innerHTML = describePhysicalState(checkSafety(lats, longs));
 			}
-			
+
 			function addPlace() {
 				numPlaces++;
-				console.log(numPlaces);
 				var place = document.createElement("DIV");
 				place.id = "p" + numPlaces;
-				
+
 				var group1 = document.createElement("DIV");
 				group1.className = "form-group";
-				
+
 				var label1 = document.createElement("LABEL");
 				label1.className = "custom-control-label";
 				label1.style.fontWeight = "bold";
 				label1.innerHTML = "Place " + numPlaces;
-				
+
 				var address = document.createElement("INPUT");
 				address.type = "text";
 				address.className = "form-control";
 				address.id = "place" + numPlaces;
 				address.placeholder = "Enter Address of Place you Visited";
-				
+
 				group1.appendChild(label1);
 				group1.appendChild(address);
-				
+
 				var group2 = document.createElement("DIV");
 				group2.className = "form-group";
-				
+
 				var label2 = document.createElement("LABEL");
 				label2.className = "custom-control-label";
 				label2.innerHTML = "Enter the day you visited this place.";
-				
+
 				var date = document.createElement("INPUT");
 				date.type = "date";
 				date.className = "form-control";
 				date.id = "date" + numPlaces;
-				
+
 				group2.appendChild(label2);
 				group2.appendChild(date);
-				
+
 				var group3 = document.createElement("DIV");
 				group3.className = "form-group";
 				group3.id = "t" + numPlaces;
-				
+
 				var label3 = document.createElement("LABEL");
 				label3.className = "custom-control-label";
 				label3.innerHTML = "Did you visit in the morning (A.M. times) or the afternoon (P.M. times)?";
-				
+
 				var amDiv = document.createElement("DIV");
 				amDiv.className = "custom-control custom-radio custom-control-inline";
-				
+
 				var amInput = document.createElement("INPUT");
 				amInput.type = "radio";
 				amInput.className = "custom-control-input";
 				amInput.id = "am" + numPlaces;
 				amInput.name = "time" + numPlaces;
-				
+
 				var label4 = document.createElement("LABEL");
 				label4.className = "custom-control-label";
 				label4.for = amInput.id;
 				label4.innerHTML = "Morning";
-				
+
 				amDiv.appendChild(amInput);
 				amDiv.appendChild(label4);
-				
+
 				var pmDiv = document.createElement("DIV");
 				pmDiv.className = "custom-control custom-radio custom-control-inline";
-				
+
 				var pmInput = document.createElement("INPUT");
 				pmInput.type = "radio";
 				pmInput.className = "custom-control-input";
 				pmInput.id = "pm" + numPlaces;
 				pmInput.name = "time" + numPlaces;
-				
+
 				var label5 = document.createElement("LABEL");
 				label5.className = "custom-control-label";
 				label5.for = pmInput.id;
 				label5.innerHTML = "Afternoon";
-				
+
+				var rmButton = document.createElement("BUTTON");
+				rmButton.type = "button";
+				rmButton.onclick = "rmPlace(document.getElementById(" + place.id + "));";
+				rmButton.innerHTML = Remove Place;
+
 				pmDiv.appendChild(pmInput);
 				pmDiv.appendChild(label5);
-				
+
 				group3.appendChild(label3);
 				group3.appendChild(amDiv);
 				group3.appendChild(pmDiv);
-				
+
 				place.appendChild(group1);
 				place.appendChild(group2);
 				place.appendChild(group3);
-				
+
 				document.getElementById("addedPlaces").appendChild(place);
+			}
+
+			function rmPlace(place) {
+				numPlaces--;
+				document.getElementById("addedPlaces").removeChild(place);
 			}
 		</script>
 		<div class="container">
@@ -192,7 +199,7 @@
 				<div id="p1">
 					<div class="form-group">
 						<label class="custom-control-label"><b>Place 1</b></label>
-						<input type="text" class="form-control" id="place1" placeholder="Enter Address of Place you Visited"></input>
+						<input type="text" class="form-control" id="place1" placeholder="Start typing to serach for the place you visited..."></input>
 					</div>
 					<div class="form-group">
 						<label class="custom-control-label">Enter the day you visited this place.</label>
@@ -211,81 +218,12 @@
 					</div>
 				</div>
 				<br />
-				
-				<div id="p2">
-					<div class="form-group">
-						<label class="custom-control-label"><b>Place 2</b></label>
-						<input type="text" class="form-control" id="place2" placeholder="Enter Address of Place you Visited"></input>
-					</div>
-					<div class="form-group">
-						<label class="custom-control-label">Enter the day you visited this place.</label>
-						<input type="date" class="form-control" id="date2"></input>
-					</div>
-					<div class="form-group" id="t2">
-						<label class="custom-control-label">Did you visit in the morning (A.M. times) or the afternoon (P.M. times)?</label>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="am2" name="time2" value="am">
-							<label class="custom-control-label" for="am2">Morning</label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="pm2" name="time2" value="pm">
-							<label class="custom-control-label" for="pm2">Afternoon</label>
-						</div>
-					</div>
-				</div>
-				<br />
-				
-				<div id="p3">
-					<div class="form-group">
-						<label class="custom-control-label"><b>Place 3</b></label>
-						<input type="text" class="form-control" id="place3" placeholder="Enter Address of Place you Visited"></input>
-					</div>
-					<div class="form-group">
-						<label class="custom-control-label">Enter the day you visited this place.</label>
-						<input type="date" class="form-control" id="date3"></input>
-					</div>
-					<div class="form-group" id="t3">
-						<label class="custom-control-label">Did you visit in the morning (A.M. times) or the afternoon (P.M. times)?</label>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="am3" name="time3" value="am">
-							<label class="custom-control-label" for="am3">Morning</label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="pm3" name="time3" value="pm">
-							<label class="custom-control-label" for="pm3">Afternoon</label>
-						</div>
-					</div>
-				</div>
-				<br />
-				
-				<div id="p4">
-					<div class="form-group">
-						<label class="custom-control-label"><b>Place 4</b></label>
-						<input type="text" class="form-control" id="place4" placeholder="Enter Address of Place you Visited"></input>
-					</div>
-					<div class="form-group">
-						<label class="custom-control-label">Enter the day you visited this place.</label>
-						<input type="date" class="form-control" id="date4"></input>
-					</div>
-					<div class="form-group" id="t4">
-						<label class="custom-control-label">Did you visit in the morning (A.M. times) or the afternoon (P.M. times)?</label>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="am4" name="time4" value="am">
-							<label class="custom-control-label" for="am4">Morning</label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="pm4" name="time4" value="pm">
-							<label class="custom-control-label" for="pm4">Afternoon</label>
-						</div>
-					</div>
-				</div>
-				<br />
-				
+
 				<div id="addedPlaces"></div>
-				
+
 				<button type="button" onclick="addPlace();">Add Place</button>
 				<button type="button" onclick="done();">Submit</button>
-				
+
 				<!--<button type="submit" class="btn btn-primary">Submit</button>-->
 			</form>
 		</div>
