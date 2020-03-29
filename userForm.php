@@ -19,9 +19,20 @@
 <!doctype html>
 <html>
 	<head>
-		<title>Am I At Risk?</title>
 		<meta charset="utf-8">
+		<meta content="IE=edge" http-equiv=X-UA-Compatible>
 		<meta name="viewport" content="width=device-width">
+
+		<!-- socials -->
+		<meta property="og:title" content="Check your travel history">
+		<meta property="og:site_name" content="Am I at risk?">
+		<meta property="og:url" content="https://stopcovid19bysocialdistancingandconnecting.online/index.html">
+		<meta property="og:image" content="/images/splash.png">
+		<meta property="og:description" content="Check if you're at risk of carrying COViD-19!">
+		<meta name="twitter:card" content="summary_large_image">
+
+		<title>Am I at risk?</title>
+		<link rel="shortcut icon" href="https://raymond.li/assets/images/profile.png" type="image/x-icon">
 		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU=" crossorigin="anonymous" />
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXvfcLocR75KjYmwY7S-LN4wt96ZAhQ-Q&libraries=places"></script>
@@ -229,8 +240,8 @@
 		</script>
 		<div class="container">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-			  <a class="navbar-brand" href="index.html">Am I At Risk?</a>
-			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<a class="navbar-brand" href="index.html"><img src="images/logo.png" style="max-height:5vh;"></img></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			  </button>
 			  <div class="collapse navbar-collapse" id="navbarNavDropdown">
