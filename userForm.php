@@ -80,6 +80,7 @@
 			</table>
 		</div>
 		<script type="text/javascript">
+			console.log(geocode("Walmart Amherstburg Supercentre, Sandwich Street South, Amherstburg, ON, Canada"));
 			var numPlaces = 1;
 			var autocompletes = [];
 
