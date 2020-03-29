@@ -30,7 +30,7 @@ function getLats(numPlaces, id1, id2, id3) {
 
 function getLongs(numPlaces) {
 	var arr = [];
-	
+
 	for(var i = 0;i < numPlaces;i++) {
 		if(document.getElementById("place" + (i + 1)).value == null || document.getElementById("place" + (i + 1)).value == "") {
 			break;
@@ -41,7 +41,7 @@ function getLongs(numPlaces) {
 		}
 	}
 	return arr;
-	// return [-83.109663, -87.654431, -122.083739, -87.685736]; 
+	// return [-83.109663, -87.654431, -122.083739, -87.685736];
 }
 
 function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement function
@@ -85,18 +85,18 @@ function getLongsGOV() {
 		array.push(document.getElementById("long" + (i + 1)).innerHTML);
 	}
 	return array;
-	// return [-83.109663, -87.654431, -122.083739, -87.685736]; 
+	// return [-83.109663, -87.654431, -122.083739, -87.685736];
 }
 
 function checkSafety(lats, longs) {
 	var risk = 0;
 	var distance = 0;
-	
+
 	// lats = getLats();
 	// longs = getLongs();
 	glats = getLatsGOV();
 	glongs = getLongsGOV();
-	
+
 	for(var i = 0;i < lats.length;i++) {
 		for(var j = 0;j < glats.length;j++) {
 			distance = measure(lats[i][0], longs[i], glats[j][0], glongs[j]);
@@ -107,21 +107,30 @@ function checkSafety(lats, longs) {
 			}
 		}
 	}
-	
+
 	return risk;
 }
 
 function describePhysicalState(risk) {
 	if(risk <= 0) {
-		return "You are safe from the virus.";
+		return "You have not had any known exposure to individuals with confirmed cases. This does not mean that you're completely virus-free, and you should still follow all directions by the government.";
 	}
 	else if(risk == 1) {
-		return "You are at the risk of catching the virus. Please stay at home to prevent further spreading the virus.";
+		return "You are at moderate risk of carrying the virus. Please self-isolate at home and monitor your health for 14 days to #flattenthecurve.";
 	}
 	else if(risk == 2) {
-		return "You are at a high risk.";
+		return "You are at a high risk of .";
 	}
 	else if(risk >= 3) {
-		return "You're going to die.";
+		return "Contact the COViD-19 services in your country ASAP; you might die.";
 	}
+}
+
+// Takes string and returns a pair(lat, long)
+function geocode(address) {
+	const gc = await fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + encodeURI(address) + "&key=AIzaSyAXvfcLocR75KjYmwY7S-LN4wt96ZAhQ-Q")
+		.then(function(response) {
+			return response.json()["geometry"]["location"];
+		});
+	return {gc["lat"], gc["lng"]};
 }
