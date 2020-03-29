@@ -177,6 +177,7 @@
 			function rmPlace(place) {
 				numPlaces--;
 				document.getElementById("addedPlaces").removeChild(place);
+				document.getElementById("addedPlaces").removeChild(br);
 			}
 		</script>
 		<div class="container">
